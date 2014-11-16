@@ -1,0 +1,68 @@
+#contenido {
+	text-align: left;
+	margin: 20px auto auto 25px;
+}
+
+#tabla_form_reserva {
+	width: 500;
+	padding: 10px;
+	margin: 10px;
+	text-align: left;
+}
+
+#tabla_form_reserva td {
+	margin-top: 223px;
+	padding: 7px;
+}
+
+#tabla_form_reserva a {
+	text-decoration: none;
+	color: #fff;
+}
+
+#tabla_form_reserva a:hover {
+	text-decoration: underline;
+}
+
+#form_reserva {
+	padding: 5px;
+	margin: 10px;
+	border: 1px solid #b7b7b7;
+	text-align: left;
+}
+
+.boton {
+	border: 1px solid #5d9efa;
+	background-color: #4579c2;
+	padding: 5px 15px;
+	color: #fffeff;
+	border-radius: 2px;
+}
+
+.boton a {
+	color: #fff;
+}
+
+#extras {
+	padding: 7px;
+	border: 1px solid #939393;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 350px;
+	background-color: #e5e5e5;
+	margin-left: 10px;
+}
+
+.caja {
+	border: 1px solid #9d9d9d;
+	padding: 3px;
+}
+
+#atencion {
+	color: #ad412d;
+	font: 9px Helvetica, Arial;
+	padding: 5px;
+	border: 1px solid #84241e;
+	margin-top: 15px;
+	width: 150px;
+}

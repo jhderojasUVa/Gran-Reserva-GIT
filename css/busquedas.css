@@ -1,0 +1,33 @@
+#busquedas {
+	border: 1px solid #9d9d9d;
+	padding: 15px;
+	border-radius: 3px;
+	text-align: left;
+	color: #5d5d5d;
+	background: #e4e4e4 url(/gran_reserva/img/ayuda.png) no-repeat 140% -100%;
+	position: fixed;
+	top: 210px;
+}
+
+.resultados {
+	font-size: 36px;
+}
+
+.resultados h1 {
+	position: relative;
+}
+
+.resultados h1 span {
+	background: url(/gran_reserva/img/h1fondo.png) repeat-x;
+	position: absolute;
+	display: block;
+	width: 100%;
+}
+
+#raya {
+	border-bottom: 1px dotted #d4d4d4;
+}
+
+#raya2 {
+	border-left: 1px solid #d4d4d4;
+}

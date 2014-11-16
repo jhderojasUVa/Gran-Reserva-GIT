@@ -1,0 +1,30 @@
+h1 {
+	font: 18px Helvetica, Arial;
+	color: #b85c4d;
+	margin-top: 10px;
+	text-align: left;
+	margin-bottom: 12px;
+}
+
+h1 a {
+	text-decoration: none;
+	color: #b85c4d;
+}
+
+h1 a:hover {
+	text-decoration: un;
+}
+
+.alaizquierda {
+	text-align: left;
+	padding-left: 25px;
+}
+
+#imagen a {
+	padding: 2px;
+}
+
+#imagen a:hover {
+	padding: 2px;
+	border: 1px solid #000;
+}

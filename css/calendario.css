@@ -1,0 +1,255 @@
+/* Generico */
+
+h1 .facultad {
+	color: #662f28;
+	background-color: #fbb6b1;
+	padding: 3px;
+	border-radius: 3px;
+}
+
+.izq_todo {
+	text-align: left;
+}
+
+.fondo_gris {
+	/*border-top: 1px solid #a8a8a8;*/
+	border-bottom: 1px dotted #d6d6d6;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.form {
+	text-align: right;
+}
+
+.form_buscar {
+	color: #3a3a3a;
+	font-size: 14px;
+	width: 250px;
+	padding: 5px;
+	margin-right: 20px;
+	border: 1px solid #5d9efa;
+}
+
+.form_select {
+	border: 1px solid #5d9efa;
+	padding: 5px 15px;
+	color: #444;
+	border-radius: 2px;
+	margin-right: 20px;
+}
+
+.form_boton {
+	border: 1px solid #5d9efa;
+	background-color: #4579c2;
+	padding: 5px;
+	color: #fffeff;
+	border-radius: 3px;
+}
+
+/* imagenes y botones */
+
+.botones {
+	margin-right: 15px;
+}
+
+/* tablas de los calendarios */
+
+#calendario > table {
+	margin: 15px 5px;
+	border: 1px solid #e5e5e5;
+}
+
+#calendario > table tr {
+	padding: 3px;
+	margin: 2px;
+}
+
+#calendario > table th, td {
+	padding: 5px;
+	margin: 3px;
+}
+
+#calendario > table th {
+	background-color: #e4e4e4;
+	border-bottom: 1px solid #848484;
+	text-align: center;
+}
+
+#calendario > table strong {
+	background-color: #dddbdb;
+	padding: 2px;
+}
+
+#calendario > table a {
+	text-decoration: none;
+	color: #5699e2;
+}
+
+#calendario > table > .conreserva a {
+	text-decoration: none;
+	color: #5699e2;
+	background-color: #fc9b7e;
+}
+
+#calendario > table a:hover {
+	text-decoration:underline;
+}
+
+#calendario a {
+	text-decoration: none;
+	color: #36567d;
+}
+
+#calendario a:hover {
+	text-decoration: underline;
+}
+
+#calendario .form_boton {
+	border: 1px solid #5d9efa;
+	background-color: #4579c2;
+	padding: 5px;
+	color: #fffeff;
+	border-radius: 3px;
+}
+
+#calendario .form_boton a {
+	color: #fff;
+}
+
+
+/* tablas de los horarios */
+
+#horario > table {
+	border: 1px solid #e5e5e5;
+	margin-top: 10px;
+}
+
+#horario > table tr {
+	padding: 3px;
+	margin: 2px;
+	border: 1px solid #dfdfdf;
+}
+
+#horario > table th, td {
+	padding: 5px;
+	margin: 3px;
+}
+
+#horario > table th {
+	background-color: #e4e4e4;
+	border-bottom: 1px solid #848484;
+	text-align: center;
+}
+
+#horario > table td {
+	border-right: 1px dotted #c7c7c7;
+	border-left: 1px dotted #c7c7c7;
+}
+
+#horario > table td:hover {
+	background-color: #dfdfdf;
+	cursor: pointer;
+}
+
+#libre a {
+	text-align: center;
+}
+
+/* Para cuando algo esta ocupado */
+#ocupado {
+	background-color: #984f44;
+	text-align: center;
+}
+
+#ocupado > a {
+	color: #fffeff;
+}
+
+/*#horario > table td:hover {
+	border-right: 1px dotted #c7c7c7;
+	border-left: 1px dotted #c7c7c7;
+	background-color: #a3a3a3;
+	cursor: pointer;
+}*/
+
+#horario > table strong {
+	padding: 2px;
+	cursor: auto;
+	background: none;
+}
+
+#horario> table a {
+	text-decoration: none;
+	color: #5699e2;
+}
+
+#horario > table a:hover {
+	text-decoration:underline;
+}
+
+/* Para las listas */
+
+#horario > ul {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	position: relative;
+	right: 10px;
+	text-align: left;
+	color: #707070;
+	margin-left: 100px;
+}
+
+#horario > ul > li {
+	list-style-type: none;
+	padding-bottom: 5px;
+}
+
+.fecha {
+	color: #fc6c64;
+	font-weight: bold;
+	text-align: center;
+}
+
+.hora {
+	color: #b2b2b2;
+}
+
+.caja_form {
+	border: 1px solid #cdcdcd;
+	padding: 3px;
+	color: #575757;
+	font: 12px Arial, Helvetica;
+}
+
+/* Informacion */
+#informacion_sala {
+	border: 1px solid #c1c1c1;
+	margin: 15px;
+	padding: 15px;
+	border-radius: 8px;
+	text-align: left;
+	list-style-type: none;
+}
+
+/* Modales */
+#simplemodal-container a.modalCloseImg {
+	background:url(/gran_reserva/img/x.png) no-repeat; /* adjust url as required */
+	width:25px;
+	height:29px;
+	display:inline;
+	z-index:3200;
+	position:absolute;
+	top:-10px;
+	right:-10px;
+	cursor:pointer;
+}
+
+#simplemodal-container {
+	border: 1px solid #909090;
+	-moz-box-shadow: 1px 1px 5px #888;
+	-webkit-box-shadow: 1px 1px 5px #888;
+	box-shadow: 1px 1px 5px #888;
+}

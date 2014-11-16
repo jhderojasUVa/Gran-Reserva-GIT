@@ -1,0 +1,8 @@
+Ficheros modificados en Agenda Web para incluir SSO:
+----------------------------------------------------
+config.inc.php (incluida variable de configuracion $login_sso)
+auth.inc.php
+lib.inc.php (incluir librerias ISSO y Http Client)
+index.php (módulo de logout)
+authform.inc.php (mensaje de error para cuando no exista el usuario)
+es.inc.php (incluida constante de idioma $index_text10)

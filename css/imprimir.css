@@ -1,0 +1,43 @@
+h1 {
+	color: #666;
+	font: 32px Arial;
+	margin-bottom: 5px;
+	padding-left: 20px;
+}
+
+h2 {
+	color: #666;
+	font: 18px Arial;
+	margin-bottom: 5px;
+	padding-left: 20px;
+}
+
+p {
+	font: 12px Arial;
+}
+
+#lista {
+	margin: 5px 5px 5px 35px;
+	border: 1px solid #acacac;
+	padding: 5px;
+	color: #000;
+	font: 12px Arial;
+}
+
+
+#lista td {
+	border-top: 1px solid #d3d2d3;
+	border-bottom: 1px solid #d3d2d3;
+}
+
+#lista th {
+	background-color: #e3e3e3;
+}
+
+.fecha {
+	color: #808080;
+}
+
+.hora {
+	color: #9e6d66;
+}

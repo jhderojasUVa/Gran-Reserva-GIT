@@ -1,0 +1,29 @@
+.alaizquierda {
+	float: right;
+	color: #747474;
+	font: 12px Verdana, Helvetica;
+	margin-right: 15px;
+	background-color: #e8e8e8;
+	padding: 8px;
+	border-radius: 3px;
+	border: 1px solid #e0e0e0;
+}
+
+.aladerecha {
+	float: left;
+}
+
+#horario a {
+	color: #526a99;
+	font-family: Arial, Helvetica;
+	text-decoration: none;
+}
+
+#horario a:hover {
+	text-decoration: underline;
+}
+
+.noexisto {
+	border-style: none;
+	border-width: 0;
+}

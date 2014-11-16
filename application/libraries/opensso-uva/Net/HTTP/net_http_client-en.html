@@ -1,0 +1,473 @@
+<html><head><meta name="keywords" content="php php4 http webdav client file fetching">
+<meta name="language" content="English">
+<meta name="author" content="Léo WEST">
+<style type="text/css">
+
+body,td,th,p,li,a {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+}
+
+body {
+	background-color: #ffffff;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+A {
+	color: #06a;
+	text-decoration: none;
+}
+
+A:hover {
+	color: red;
+	
+}
+
+
+p,ul,li,table {
+	margin-left: 3em;
+}
+
+p.note {
+	background-color: #fefecc;
+	font-size: smaller;
+	padding: 8px;
+}
+
+span.code {
+	color: #448; font-weight: bold;
+}
+
+div.code {	
+	border : 1px solid #88a;
+	font-family: Courier, Fixed, Arial;
+	font-size: smaller;
+	color: green;
+	border: 1px solid marron;
+	padding: 1em;
+	margin-top: 1em;
+	margin-bottom: 5em;
+	margin-right: 3em;
+	margin-left: 4em;
+	background-color: #f0eeee;
+}
+
+
+ul {
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+li {
+	padding: 1px 0px 1px 0px;
+	margin-left: 2px;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+	font-family: Verdana, Arial, Helvetica, Sans-serif;
+	color: maroon;
+}
+
+h2 { margin-left: 1em; }
+h3 { margin-left: 2em; }
+h4 { margin-left: 3em; }
+
+h5,h6 {
+	margin-left: 4em;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+h1 {
+	text-align: center;
+	font-variant: small-caps;
+}
+
+
+.aIdx {
+	color: blue;
+	font-weight: bold;
+	text-decoration: none;
+	vlink-color: darkblue;
+	
+}
+.aIdx:active { color: pink; }
+.aIdx:hover { color: pink; }
+
+table.params {
+	border-collapse: separate;
+	padding : 2 2 1 1;
+}
+
+th {
+	vertical-align: top;
+	text-align: center;
+}
+
+td {
+	font-family: Arial, Helvetica, Sans-serif;
+}
+</style>
+
+</head>
+<body>
+<a name="sec_1"><h1> HTTP Client class</h1></a>
+<p class="text">   Net_HTTP_Client is an almost complete HTTP Client, implementing all <strong>HTTP</strong> methods and a subset of <strong>WebDAV</strong> the standard web publishing protocol.<br>
+<br>
+	 <a href="zip/httpclient.zip">Download httpclient.zip</a>, a zip archive providing the class and documentation.<br>
+<br>
+</p><a name="sec_2"><h3> Informations</h3></a>
+<p class="text">	Version : 0.7<br>
+	Licence : GPL - You may send a mail if you enjoy this component<br>
+	Lastmod : Aug 2001<br>
+	Author :  <a href="mailto:west_leo@yahoo-REMOVE-.com?subject=HttpClient">Leo West</a><br>
+<br>
+</p><a name="sec_3"><h3> Documentation</h3></a>
+
+<ul>
+<ul>
+<ul>
+<li> <a class="index" href="#sec_4">Sample use</a>
+<ul>
+<li> <a class="index" href="#sec_5">A minimal example</a>
+<li> <a class="index" href="#sec_6">Using HTTP/1.1 persistent connexions</a>
+</ul>
+<li> <a class="index" href="#sec_7">Main methods</a>
+<ul>
+<li> <a class="index" href="#sec_8">Net_HTTP_Client( [host, port] )</a>
+<li> <a class="index" href="#sec_9">Connect( host, port )</a>
+<li> <a class="index" href="#sec_10">Disconnect()</a>
+<li> <a class="index" href="#sec_11">setHeaders( headers )</a>
+<li> <a class="index" href="#sec_12">removeHeader( headerName )</a>
+<li> <a class="index" href="#sec_13">setCredentials( username, password )</a>
+<li> <a class="index" href="#sec_14">setProtocolVersion( version )</a>
+<li> <a class="index" href="#sec_15">setProxy( proxyHost, proxyPort )</a>
+<li> <a class="index" href="#sec_16">addHeader( headerName, headerValue )</a>
+<li> <a class="index" href="#sec_16a">addCookie( cookieName, cookieValue )</a>
+<li> <a class="index" href="#sec_16b">removeCookies()</a>
+<li> <a class="index" href="#sec_17">Get( uri )</a>
+<li> <a class="index" href="#sec_18">getHeaders()</a>
+<li> <a class="index" href="#sec_19">getBody()</a>
+<li> <a class="index" href="#sec_20">Head( uri )</a>
+<li> <a class="index" href="#sec_20a">Options( uri )</a>
+<li> <a class="index" href="#sec_21">Post( uri, query_params )</a>
+</ul>
+<li> <a class="index" href="#sec_22">WebDAV methods</a>
+<ul>
+<li> <a class="index" href="#sec_23">Copy( srcUri, destUri, overwrite )</a>
+<li> <a class="index" href="#sec_24">Delete( uri )</a>
+<li> <a class="index" href="#sec_25">Move( srcUri, destUri, overwrite )</a>
+<li> <a class="index" href="#sec_26">MkCol( uri )</a>
+<li> <a class="index" href="#sec_27">PropFind( uri, scope )</a>
+<li> <a class="index" href="#sec_28">Put( uri, filecontent )</a>
+<li> <a class="index" href="#sec_29">Lock( uri, lockScope, lockType, lockOwner )</a>
+<li> <a class="index" href="#sec_30">Unlock( uri, lockToken )</a>
+</ul>
+<li> <a class="index" href="#sec_31">Diagnostics and debug</a>
+<ul>
+<li> <a class="index" href="#sec_32">getStatus()</a>
+<li> <a class="index" href="#sec_33">getStatusMessage()</a>
+<li> <a class="index" href="#sec_34">setDebug( flags )</a>
+<li> <a class="index" href="#sec_35">Other methods</a>
+</ul>
+<li> <a class="index" href="#sec_36">Changelog</a>
+<li> <a class="index" href="#sec_37">References</a>
+
+</ul>
+</ul>
+</ul>
+<a name="sec_4"><h3> Sample use</h3></a>
+<a name="sec_5"><h4> A minimal example</h4></a>
+<div class="code"><p class="text">	include &quot;Net/HTTP/Client.php&quot;;<br>
+<br>
+	$http = new Net_HTTP_Client();<br>
+	$http-&gt;Connect( &quot;somehost&quot;, 80 ) or die( &quot;Connect problem&quot; );<br>
+	$status = $http-&gt;Get( &quot;/index.html&quot; );<br>
+	if( $status != 200 )<br>
+	    die( &quot;Problem : &quot; . $http-&gt;getStatusMessage() );<br>
+	else<br>
+	    echo $http-&gt;getBody();<br>
+	$http-&gt;Disconnect();<br>
+</div>
+<br>
+</p><a name="sec_6"><h4> Using HTTP/1.1 persistent connexions</h4></a>
+<div class="code"><p class="text">	$http = new Net_HTTP_Client( &quot;dir.yahoo.com&quot;, 80 );<br>
+	$http-&gt;setProtocolVersion( &quot;1.1&quot; );<br>
+	$http-&gt;addHeader( &quot;Host&quot;, &quot;dir.yahoo.com&quot; );<br>
+	$http-&gt;addHeader( &quot;Connection&quot;, &quot;keep-alive&quot; );<br>
+<br>
+	if( $http-&gt;Get( &quot;/Reference/Libraries/&quot; ) == 200 )<br>
+		$page1 = $http-&gt;getBody();<br>
+<br>
+	if( $http-&gt;Get( &quot;/News_and_Media/&quot; ) == 200 )<br>
+		$page2 = $http-&gt;getBody();<br>
+	$http-&gt;disconnect();<br>
+</div>
+<br>
+</p><a name="sec_7"><h3> Main methods</h3></a>
+<a name="sec_8"><h4> Net_HTTP_Client( [host, port] )</h4></a>
+<p class="text">	Class constructor<br>
+	parameters host and port are optional, but when defined, the connection is immediate.<br>
+	<strong>seeAlso</strong> : Connect method<br>
+<br>
+</p><a name="sec_9"><h4> Connect( host, port )</h4></a>
+<p class="text">	Open the connection to the server<br>
+	<span class="code">host</span> is the server address (or IP)<br>
+	<span class="code">port</span> is the optional server listening port, defaults to 80<br>
+	return true if successfull, false is connection failed. Use getStatusMessage to examine the error problem<br>
+<br>
+</p><a name="sec_10"><h4> Disconnect()</h4></a>
+<p class="text">	close the connection to the  server<br>
+<br>
+</p><a name="sec_11"><h4> setHeaders( headers )</h4></a>
+<p class="text">	Define all HTTP headers to be sent during next requests.<br>
+	<span class="code">headers</span> is an array containing the headers in the form "headerName" => "headerValue"<br>
+	header names are case sensitive in this class.<br>
+<br>
+</p><a name="sec_12"><h4> removeHeader( headerName )</h4></a>
+<p class="text">	unset a request header<br>
+	<span class="code">headerName</span> is the header name. Be aware i choose to use <strong>case sensitive</strong> headers.<br>
+<br>
+</p><a name="sec_13"><h4> setCredentials( username, password )</h4></a>
+<p class="text">	Set the username and password to access a protected resource on the server.<br>
+	Only &quot;Basic&quot; authentication scheme is supported yet<br>
+<br>
+	<span class="code">username </span> The user identifier<br>
+	<span class="code">password </span> The user password (clear form)<br>
+<br>
+</p><a name="sec_14"><h4> setProtocolVersion( version )</h4></a>
+<p class="text">	Define the HTTP protocol version to use<br>
+	<span class="code">version</span> is a string representing the version number, with one digit: "0.9", "1.0", "1.1"<br>
+	return false if the version number is bad, true if OK<br>
+<br>
+	Note that for some obscure reasons, persistent connexions sometimes fail with some versions of PHP (4.0.6 notably)<br>
+	Socket gurus, you may track down the problem in the processBody() code.<br>
+<br>
+</p><a name="sec_15"><h4> setProxy( proxyHost, proxyPort )</h4></a>
+<p class="text">	Instruct the class to use a connect through a proxy. Tested only against HTTP proxies (Squid etc.)<br>
+<br>
+	<span class="code">proxyHost</span> is the proxy address, <span class="code">proxyPort</span> the proxy port, usually 80 or 8080<br>
+<br>
+</p><a name="sec_16"><h4> addHeader( headerName, headerValue )</h4></a>
+<p class="text">	Define a request header to be sent during next requests. headerName is case sensitive<br>
+	<span class="code">headerName</span> HTTP header name<br>
+	<span class="code">headerValue</span> HTTP header value<br>
+<br>
+</p><a name="sec_16a"><h4> addCookie( cookieName, cookieValue )</h4></a>
+<p class="text">	set a cookie to use for the next requests<br>cookie is a session-type cookie. 
+  
+	<span class="code">cookieName</span> cookie name<br>
+	<span class="code">cookieValue</span> cookie value<br>
+	<small>[since v0.7]</small>
+<br>
+</p><a name="sec_16b"><h4> removeCookies( )</h4></a>
+<p class="text">	discards all defined cookies<br>
+	<small>[since v0.7]</small>
+<br>
+</p><a name="sec_17"><h4> Get( uri )</h4></a>
+<p class="text">	issue a GET http request<br>
+	<span class="code">$uri</span> is the URI of the document<br>
+	<span class="code">Returns</span> the status code received from server (200 if ok)<br>
+	see Also getHeaders &amp; getBody methods<br>
+<br>
+</p><a name="sec_18"><h4> getHeaders()</h4></a>
+<p class="text">	return the response headers. Headers are returned as an (headername =&gt; value) array.<br>
+	To be called after a request, to examine the headers returned by server: Set-Cookie, Location or whatever.<br>
+<div class="code">	$status = $http-&gt;Get( &quot;/&quot; );<br>
+	...<br>
+	// document is somewhere else<br>
+	if( $status == 301 ||  $status == 302 || $status == 307 )<br>
+	{<br>
+		$headers = $http-&gt;getHeaders();<br>
+		$status = $http-&gt;Get( $headers[&quot;Location&quot;] );<br>
+	}<br>
+<br>
+</div>
+<br>
+</p><a name="sec_19"><h4> getBody()</h4></a>
+<p class="text">	return a string containing the response body,  to be used after a Get or Post call for instance.<br>
+<br>
+</p><a name="sec_20"><h4> Head( uri )</h4></a>
+<p class="text">	issue a HEAD request<br>
+	$uri is a string containing the URI of the document ( the part of the URL after the host and port /)<br>
+	<strong>Returns</strong> the status code received from server (200 if ok)<br>
+	To examine the headers content, see getResponseHeaders method<br>
+<br>
+</p><a name="sec_20a"><h4> Options( uri )</h4></a>
+<p class="text">	issue an OPTIONS request<br>
+	<span class="code">uri</span> document URI, usually "/"<br>
+	Returns an array with the options supported by the server<br>
+	<small>[since v0.7]</small>
+<br>
+</p><a name="sec_21"><h4> Post( uri, query_params )</h4></a>
+<p class="text">	issue a POST http request<br>
+	<span class="code">uri</span> is the URI of the document<br>
+	<span class="code">query_params</span> is an hash array containg the form parameters to send<br>
+	Returns the status code received from server (200 if ok)<br>
+<br>
+	<strong>Example</strong><br>
+<div class="code">	$params = array( &quot;login&quot; =&gt; &quot;scott&quot;, &quot;password&quot; =&gt; &quot;tiger&quot; );<br>
+	$status = $http-&gt;post( &quot;/login.php&quot;, $params );<br>
+</div>
+<br>
+</p><a name="sec_22"><h3> WebDAV methods</h3></a>
+<a name="sec_23"><h4> Copy( srcUri, destUri, overwrite )</h4></a>
+<p class="text">	Copy an existing file on the server into a new place, using the COPY request<br>
+<br>
+	<span class="code">srcUri</span> is the current file location on the server. dont forget the heading "/"<br>
+	<span class="code">destUri</span> is the destination location on the server. this is *not* a full URL<br>
+	<span class="code">overwrite</span> indicates whether to overwrite (true) or leave (false) an existing destination. overwrite by default<br>
+	Returns the status code 204 (Unchanged) if OK.<br>
+<br>
+	<span class="code">$status = $http-&gt;Copy( "/sources/client.php", "/backup/client-0.4.php", true );</span><br>
+<br>
+</p><a name="sec_24"><h4> Delete( uri )</h4></a>
+<p class="text">	Delete a file on the server using the &quot;DELETE&quot; HTTP-DAV request<br>
+	<span class="code">uri</span> the location of the file on the server.<br>
+	Returns the status code (204 if OK)<br>
+<br>
+	Note: This HTTP method is *not* widely supported, and only partially supports &quot;collection&quot;<br>
+	deletion, as the XML response is not parsed.<br>
+<br>
+</p><a name="sec_25"><h4> Move( srcUri, destUri, overwrite )</h4></a>
+<p class="text">	Move or rename a resource on the server, using the MOVE request.<br>
+	<span class="code">srcUri</span> is the current file location on the server. dont forget the heading /<br>
+	<span class="code">destUri</span> the destination location on the server. this is *not* a full URL<br>
+	<span class="code">overwrite</span> is a  boolean set to true to overwrite an existing destination.<br>
+	Return the response status code as a string, 204 (Unchanged) if OK.<br>
+<br>
+</p><a name="sec_26"><h4> MkCol( uri )</h4></a>
+<p class="text">	Send a MKCOL HTTP-DAV request<br>
+	Create a collection (usually a directory) on the server.<br>
+	<span class="code">uri</span> is the collection's location on the server.<br>
+	Return the status code, 201 (Created) if OK<br>
+<br>
+</p><a name="sec_27"><h4> PropFind( uri, scope )</h4></a>
+<p class="text">	Retrieves meta informations about a resource on the server, using the WebDAV PROPFIND method<br>
+	The XML reply body is <strong>not parsed</strong>, therfore you will have to do it :)<br>
+<br>
+	<span class="code">uri</span> the location of the file on the server<br>
+	<span class="code">scope</span> set the scope of the request, (somehow similar to the LDAP scope notion):<br>
+	To retrieve infos about the node only (0),  for the node and its direct children (1), or &quot;Infinity&quot; infos for the node and all its descendant nodes.<br>
+<br>
+	Returns the response status code, 207 (Multi-Status) if OK<br>
+<br>
+</p><a name="sec_28"><h4> Put( uri, filecontent )</h4></a>
+<p class="text">	Send a PUT request<br>
+	PUT is the method to sending a file on the server. it is *not* widely supported<br>
+	<span class="code">uri</span> the location of the file on the server. dont forget the heading "/"<br>
+	<span class="code">filecontent</span> is the content of the file. binary content accepted<br>
+	Returns the status code as a string, 201 (Created) if OK.<br>
+<br>
+</p><a name="sec_29"><h4> Lock( uri, lockScope, lockType, lockOwner )</h4></a>
+<p class="text">	<span class="note">WARNING: experimental</span><br>
+	Lock a ressource on the server and return 200 if locking went OK.<br>
+	The XML reply is not parsed for now [translate: Your help is welcome].<br>
+<br>
+	 <span class="code">uri </span> URL of the resource to lock<br>
+	 <span class="code">lockScope </span> scope of the lock. Use "exclusive" for an private lock, "inclusive" for a shared lock.<br>
+	 <span class="code">lockType </span> Access type for the lock : Use "write", ?<br>
+	 <span class="code">lockOwner </span> An URL representing the owner of this lock<br>
+<br>
+<div class="code">	$reply = $http-&gt;Lock( &quot;/docs/manual.html&quot;, &quot;inclusive&quot;, &quot;write&quot;, &quot;leo@leo.com&quot; );<br>
+	if( $reply != 200 ) {<br>
+		$msg = $http-&gt;getStatusMessage();<br>
+		die( &quot;Unlock problem, server says $msg&quot; );<br>
+	} else {<br>
+		$xmlResponse = $http-&gt;getBody();<br>
+		// TODO : parse the XML response here<br>
+	}<br>
+</div>
+<br>
+</p><a name="sec_30"><h4> Unlock( uri, lockToken )</h4></a>
+<p class="text">	<span class="note">WARNING: experimental</span><br>
+	Release a lock on a remote file and return the response code (204 if unlock OK)<br>
+	<span class="code">uri</span> The relative URL of the resource to unlock<br>
+	<span class="code">lockToken</span>  The lock token given at lock time, eg: opaquelocktoken:e71d4fae-5dec-22d6-fea5-00a0c91e6be4<br>
+<br>
+<div class="code">	$token = &quot;opaquelocktoken:e71d4fae-5dec-22d6-fea5-00a0c91e6be4&quot;;<br>
+	$reply = $http-&gt;Unlock( &quot;/docs/manual.html&quot;, $token );<br>
+	if( $reply != 204 ) {<br>
+		$msg = $http-&gt;getStatusMessage();<br>
+		die( &quot;Unlock problem, server says $msg&quot; );<br>
+	}<br>
+</div>
+<br>
+</p><a name="sec_31"><h3> Diagnostics and debug</h3></a>
+<a name="sec_32"><h4> getStatus()</h4></a>
+<p class="text">	Return the server status code for the last request.<br>
+	HTTP codes are divided in classes (where x is a digit)<br>
+<br>
+	- 20x : request processed OK<br>
+	- 30x : document moved<br>
+	- 40x : client error ( bad url, document not found, etc...)<br>
+	- 50x : server error<br>
+<br>
+</p><a name="sec_33"><h4> getStatusMessage()</h4></a>
+<p class="text">	Returns the full response status of the last request, in the form &quot;CODE Message&quot;<br>
+	Example : <span class="code">404 Document not found</span><br>
+<br>
+</p><a name="sec_34"><h4> setDebug( flags )</h4></a>
+<p class="text">	Turn on debug messages<br>
+	<span class="code">$client-&gt;setDebug( DBGTRACE | DBGINDATA );</span><br>
+<br>
+	Flags is a bit mask of following debug modes:<br>
+</p><!-- table --><table class="params">
+<tr>	<td class="params">DBGTRACE</td>
+	<td class="params">to trace methods calls stack</td>
+</tr>
+<tr>	<td class="params">DBGINDATA</td>
+	<td class="params">to debug data received from server</td>
+</tr>
+<tr>	<td class="params">DBGOUTDATA</td>
+	<td class="params">to debug data sent</td>
+</tr>
+<tr>	<td class="params">DBGLOW</td>
+	<td class="params">to debug low-level (usually internal) methods</td>
+</tr>
+<tr>	<td class="params">DBGSOCK</td>
+	<td class="params">to debug socket-level stuff</td>
+</tr>
+</table><a name="sec_35"><h4> Other methods</h4></a>
+<p class="text">	sendCommand, makeURI, processReply, processHeader, processBody, readReply, flushReply<br>
+	These methods are private therefore not documented and USUALLY NOT FOR DIRECT USE.<br>
+<br>
+</p><a name="sec_36"><h3> Changelog</h3></a>
+<p class="text"><pre>
+	0.1 initial version
+	0.2 documentation completed
+	    + getHeaders(), getBody()
+		 o Post(), Connect()
+	0.3 DAV enhancements:
+		 + Put() method
+	0.4 continued DAV support 
+		 + Delete(), Move(), MkCol(), Propfind()  methods
+		 o added url property, remove host and port properties
+		 o Connect, Net_HTTP_Client (use of this.url)
+		 o processBody() : use non-blocking to fix a socket pblm
+	0.5 debug support
+		 + setDebug()
+		 + debug levels definitions (DBG*)
+	0.6 + Lock() method
+		 + setCredentials() method and fix - thanks Thomas Olsen
+		 + support for Get( full_url )
+		 o fix POST call (duplicate content-length) - thanks to Javier Sixto
+	0.7 + OPTIONS method support
+	    + addCookie and removeCookies methods
+	    o fix the "0" problem
+	    o fix undefined variable warning
+</pre>
+</p><a name="sec_37"><h3> References</h3></a>
+<p class="text">	RFC2616 &quot;Hypertext Transfer Protocol -- HTTP/1.1&quot;<br>
+	<a href="http://lwest.free.fr/doc/protocols/http/rfc2616.html" target="_new">http://lwest.free.fr/doc/protocols/http/rfc2616.html</a><br>
+<br>
+	RFC2518 &quot;HTTP Extensions for Distributed Authoring WEBDAV&quot;<br>
+	<a href="http://lwest.free.fr/doc/protocols/http/rfc2518.html" target="_new">http://lwest.free.fr/doc/protocols/http/rfc2518.html</a><br>
+<br>
+	WebDAV Community Site<br>
+	<a href="http://www.webdav.org" target="_new">http://www.webdav.org</a><br>
+<br>
+</body>
+</html>
+
